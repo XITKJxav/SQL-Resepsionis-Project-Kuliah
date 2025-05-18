@@ -12,8 +12,24 @@ create table Tamu (
     Kewarganegaraan varchar(100)
 );
 
+create table RoleUser(
+	KD_Role_User Varchar(100),
+    Nama_Role varchar(255)	
+);
+
+create table Karyawan(
+	KD_Resepsionis varchar(100) primary key,
+	Nama_Lengkap varchar(100),
+    No_Telepon varchar(20),
+	Jenis_Kelamin enum("L", "P"),
+    KD_Role_User varchar(100),
+	Alamat varchar(255),
+    foreign key (KD_Role_User) references RoleUser(KD_Role_User)
+);
+
+
 create table Fasilitas (
-	 ID_Fasilitas_Kamar varchar(10) primary key,
+	 ID_Fasilitas varchar(10) primary key,
      nama_barang varchar(255)
 );
 
@@ -24,9 +40,9 @@ create table TipeKamar(
 );
 
 create table FasilitasKamar (
-	ID_Fasilitas_Kamar varchar(10),
+	ID_Jenis_Fasilitas varchar(10),
     Kode_Tipe_Kamar varchar(8),
-    foreign key (ID_Fasilitas_Kamar) references Fasilitas(ID_Fasilitas_Kamar),
+    foreign key (ID_Fasilitas) references Fasilitas(ID_Fasilitas),
     foreign key (Kode_Tipe_Kamar) references TipeKamar(Kode_Tipe_Kamar)
 );
 
@@ -53,8 +69,8 @@ create table ReservasiKamar(
 );
 
 create table LayananHotel(
+	Kode_Layanan_Hotel varchar(6),
 	Kode_Reservasi_Kamar varchar(100),
-    Kode_Layanan_Hotel varchar(6),
     foreign key (Kode_Reservasi_Kamar) references JenisLayanan(Kode_Reservasi_Kamar),
 	foreign key (Kode_Layanan_Hotel) references JenisLayanan(Kode_Jenis_Layanan)
 );
@@ -65,3 +81,4 @@ create table Tagihan(
     Total int,
     foreign key (Kode_Reservasi_Kamar) references JenisLayanan(Kode_Reservasi_Kamar)
 );
+
