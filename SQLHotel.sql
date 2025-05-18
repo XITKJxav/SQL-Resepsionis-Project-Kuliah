@@ -60,5 +60,8 @@ create table LayananHotel(
 );
 
 create table Tagihan(
-	
+	Kd_Tagihan varchar(100),
+    Kode_Reservasi_Kamar varchar(100) primary key,
+    Total int,
+    foreign key (Kode_Reservasi_Kamar) references JenisLayanan(Kode_Reservasi_Kamar)
 );
